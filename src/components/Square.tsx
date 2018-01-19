@@ -1,14 +1,25 @@
 import * as React from 'react';
 
-interface SquareProps {
+interface Props {
     value: number;
 }
 
-export class Square extends React.Component<SquareProps, {}> {
+interface State {
+    value: string | null;
+}
+
+export class Square extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            value: null
+        };
+    }
+
     render() {
-        const { value } = this.props;
+        const { value } = this.state    ;
         return (
-            <button className="square">
+            <button className="square" onClick={() => this.setState({value: 'X'})}>
                 {value}
             </button>
         );
