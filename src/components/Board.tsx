@@ -7,7 +7,7 @@ interface BoardProps {
 
 export class Board extends React.Component<BoardProps, {}> {
     renderSquare(i: number) {
-        return <Square />;
+        return <Square value={i} />;
     }
     render() {
         const status = 'Next Player X';
