@@ -1,27 +1,14 @@
 import * as React from 'react';
 
-interface Props {
-    value: number;
+interface Props { // 定义prop的接口
+    value: string | null; // 定义传入value的类型 为一个Union Types
+    onClick: () => void;
 }
 
-interface State {
-    value: string | null;
-}
-
-export class Square extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            value: null
-        };
-    }
-
-    render() {
-        const { value } = this.state    ;
-        return (
-            <button className="square" onClick={() => this.setState({value: 'X'})}>
-                {value}
-            </button>
-        );
-    }
+export function Square(props: Props) {
+    return (
+        <button className="square" onClick={props.onClick}>
+            {props.value}
+        </button>
+    );
 }

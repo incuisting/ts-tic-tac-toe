@@ -1,16 +1,40 @@
 import * as React from 'react';
 import { Square } from './Square';
 
-interface BoardProps {
+interface Props {
 
 }
 
-export class Board extends React.Component<BoardProps, {}> {
+interface State {
+    squares: Array<null | string>;
+    xIsNext: boolean;
+}
+
+export class Board extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            squares: new Array(9).fill(null),
+            xIsNext: true
+        };
+    }
+    handleClick(i: number) {
+        const squares = this.state.squares.slice();
+        squares[i] = this.state.xIsNext ? 'X' : 'O';
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext
+        });
+    }
     renderSquare(i: number) {
-        return <Square value={i} />;
+        return (
+            <Square
+                value={this.state.squares[i]}
+                onClick={() => this.handleClick(i)}
+            />);
     }
     render() {
-        const status = 'Next Player X';
+        const status = `Next Player ${this.state.xIsNext ? 'X' : 'O'}`;
 
         return (
             <div>
