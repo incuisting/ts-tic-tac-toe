@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { Square } from './Square';
 
 interface Props {
@@ -11,6 +12,17 @@ interface Props {
 //     xIsNext: boolean;
 // }
 
+const BoardRow = styled.div`
+    &:after{
+        clear: both;
+        content: "";
+        display: table;
+    }
+`;
+
+const Status = styled.div`
+    margin-bottom: 10px;
+`;
 export class Board extends React.Component<Props, {}> {
     renderSquare(i: number) {
         return (
@@ -22,22 +34,22 @@ export class Board extends React.Component<Props, {}> {
     render() {
         return (
             <div>
-                <div className="status">{status}</div>
-                <div className="board-row">
+                <Status>{status}</Status>
+                <BoardRow>
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
                     {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
+                </BoardRow>
+                <BoardRow>
                     {this.renderSquare(3)}
                     {this.renderSquare(4)}
                     {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
+                </BoardRow>
+                <BoardRow>
                     {this.renderSquare(6)}
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}
-                </div>
+                </BoardRow>
             </div>
         );
     }

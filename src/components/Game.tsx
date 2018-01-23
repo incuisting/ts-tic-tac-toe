@@ -1,8 +1,17 @@
 import * as React from 'react';
 import { Board } from './Board';
+import styled from 'styled-components';
+
+const GameWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+const GameInfo = styled.div`
+    margin-left: 20px;
+`;
 
 interface GameProps {
-
 }
 
 interface State {
@@ -69,18 +78,18 @@ export class Game extends React.Component<GameProps, State> {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
         return (
-            <div className="game">
-                <div className="game-board">
+            <GameWrapper>
+                <div>
                     <Board
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
                     />
                 </div>
-                <div className="game-info">
+                <GameInfo>
                     <div>{status}</div>
                     <ol>{moves}</ol>
-                </div>
-            </div>
+                </GameInfo>
+            </GameWrapper>
         );
     }
 }
