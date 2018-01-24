@@ -36,10 +36,10 @@ export class Game extends React.Component<GameProps, State> {
             return;
         }
         squares[i] = this.props.xIsNext ? 'X' : 'O';
-        let a = history.concat([{ squares: squares }]);
-        let stepNumber = history.length;
-        let xIsNext = !this.props.xIsNext;
-        this.props.handleClick(a, xIsNext, stepNumber);
+        // let a = history.concat([{ squares: squares }]);
+        // let stepNumber = history.length;
+        // let xIsNext = !this.props.xIsNext;
+        // this.props.handleClick(a, xIsNext, stepNumber);
     }
     jumpTo(step: number) {
         this.setState({
