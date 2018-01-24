@@ -11,44 +11,35 @@ const GameInfo = styled.div`
     margin-left: 20px;
 `;
 
-interface GameProps {
-}
-
-interface State {
+export interface GameProps {
     // history 为复杂类型的数组
     history: Array<{
         squares: Array<string | null>
     }>;
     xIsNext: boolean;
     stepNumber: number;
+    handleClick?: (a: any, b: any, c: any) => any;
+}
+
+interface State {
 }
 
 export class Game extends React.Component<GameProps, State> {
     constructor(props: GameProps) {
         super(props);
-        this.state = {
-            history: [{
-                squares: new Array(9).fill(null),
-            }],
-            stepNumber: 0,
-            xIsNext: true
-        };
     }
-    handleClick(i: number) {
-        const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    handleClickin(i: number) {
+        const history = this.props.history.slice(0, this.props.stepNumber + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
-        squares[i] = this.state.xIsNext ? 'X' : 'O';
-        this.setState({
-            history: history.concat([{
-                squares: squares
-            }]),
-            stepNumber: history.length,
-            xIsNext: !this.state.xIsNext,
-        });
+        squares[i] = this.props.xIsNext ? 'X' : 'O';
+        let a = history.concat([{ squares: squares }]);
+        let stepNumber = history.length;
+        let xIsNext = !this.props.xIsNext;
+        this.props.handleClick(a, xIsNext, stepNumber);
     }
     jumpTo(step: number) {
         this.setState({
@@ -57,8 +48,8 @@ export class Game extends React.Component<GameProps, State> {
         });
     }
     render() {
-        const history = this.state.history;
-        const current = history[this.state.stepNumber];
+        const history = this.props.history;
+        const current = history[this.props.stepNumber];
         const winner = calculateWinner(current.squares);
 
         const moves = history.map((step, move) => {
@@ -75,14 +66,14 @@ export class Game extends React.Component<GameProps, State> {
         if (winner) {
             status = 'Winner: ' + winner;
         } else {
-            status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+            status = 'Next player: ' + (this.props.xIsNext ? 'X' : 'O');
         }
         return (
             <GameWrapper>
                 <div>
                     <Board
                         squares={current.squares}
-                        onClick={(i) => this.handleClick(i)}
+                        onClick={(i) => this.handleClickin(i)}
                     />
                 </div>
                 <GameInfo>
