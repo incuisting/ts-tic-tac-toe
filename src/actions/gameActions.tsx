@@ -1,16 +1,27 @@
-import { createActions } from 'redux-actions';
+import { createAction } from 'redux-actions';
+
+type History = Array<{ squares: Array<string | null>; }>;
+type XIsNext = boolean;
+type StepNumber = number;
 
 export interface HandleClick {
-    history: Array<{
-        squares: Array<string | null>
-    }>;
-    xIsNext: boolean;
-    stepNumber: number;
+  history: Array<{
+    squares: Array<string | null>
+  }>;
+  xIsNext: boolean;
+  stepNumber: number;
 }
-// interface GameActions {
 
-// }
-
-export const gameActions = createActions({
-    'HANDLE_CLICK': ({ history, stepNumber, xIsNext }: HandleClick) => ({ history, stepNumber, xIsNext }),
-});
+export const gameActions = {
+  handelClick: createAction(
+    'HANDLE_CLICK',
+    (
+      history: History,
+      stepNumber: StepNumber,
+      xIsNext: XIsNext
+    ) => {
+      // console.log('actions', history, stepNumber, xIsNext);
+      return { history, stepNumber, xIsNext };
+    }
+  )
+};
