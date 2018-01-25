@@ -12,6 +12,11 @@ export interface HandleClick {
   stepNumber: number;
 }
 
+export interface JumpTo {
+  xIsNext: boolean;
+  stepNumber: number;
+}
+
 export const gameActions = {
   handelClick: createAction(
     'HANDLE_CLICK',
@@ -22,6 +27,15 @@ export const gameActions = {
     ) => {
       // console.log('actions', history, stepNumber, xIsNext);
       return { history, stepNumber, xIsNext };
+    }
+  ),
+  jumpTo: createAction(
+    'JUMP_TO',
+    (
+      stepNumber: StepNumber,
+      xIsNext: XIsNext
+    ) => {
+      return { stepNumber, xIsNext };
     }
   )
 };

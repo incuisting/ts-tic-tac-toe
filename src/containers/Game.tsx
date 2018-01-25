@@ -16,6 +16,7 @@ interface StateProps {
 }
 interface DispatchProps {
     handleClick: typeof gameActions.handelClick;
+    jumpTo: typeof gameActions.jumpTo;
 }
 // 组件的state
 interface State { }
@@ -23,7 +24,7 @@ interface State { }
 interface GameProps extends StateProps, DispatchProps { }
 
 const GameWrapper = styled.div`
-    display: flex;
+    display: flex;  
     flex-direction: row;
 `;
 
@@ -36,7 +37,6 @@ export class Game extends React.Component<GameProps, State> {
         super(props);
     }
     handleClickin(i: number) {
-        console.log(this.props.handleClick);
         const history = this.props.history.slice(0, this.props.stepNumber + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
@@ -50,10 +50,9 @@ export class Game extends React.Component<GameProps, State> {
         this.props.handleClick(a, stepNumber, xIsNext);
     }
     jumpTo(step: number) {
-        this.setState({
-            stepNumber: step,
-            xIsNext: (step % 2) ? false : true,
-        });
+        let stepNumber = step,
+            xIsNext = (step % 2) ? false : true;
+        this.props.jumpTo(stepNumber, xIsNext);
     }
     render() {
         const history = this.props.history;
@@ -124,7 +123,8 @@ const mapStateToProps = (state: StoreState): StateProps => {
 const mapDispatchToProps = (dispatch: Dispatch<DispatchProps>): DispatchProps => (
     {
         ...bindActionCreators({
-            handleClick: gameActions.handelClick
+            handleClick: gameActions.handelClick,
+            jumpTo: gameActions.jumpTo
         }, dispatch)
     });
 

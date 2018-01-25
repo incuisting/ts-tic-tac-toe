@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { HandleClick } from '../actions/gameActions';
+import { HandleClick, JumpTo } from '../actions/gameActions';
 
 interface Action<T> {
     type: string;
@@ -20,6 +20,12 @@ export default handleActions(
         ['HANDLE_CLICK']: (state, action: Action<HandleClick>) => {
             return Object.assign({}, state, {
                 history: action.payload.history,
+                stepNumber: action.payload.stepNumber,
+                xIsNext: action.payload.xIsNext
+            });
+        },
+        ['JUMP_TO']: (state, action: Action<JumpTo>) => {
+            return Object.assign({}, state, {
                 stepNumber: action.payload.stepNumber,
                 xIsNext: action.payload.xIsNext
             });
