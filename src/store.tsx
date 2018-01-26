@@ -1,10 +1,11 @@
 import { applyMiddleware , createStore } from 'redux';
-import game from './reducer/game';
+import rootReducer from './reducer/index';
 import { StoreState } from './types/index';
+import { GameProps } from './containers/Game';
 import logger from 'redux-logger';
 
-const store = createStore<StoreState>(
-    game,
+const store = createStore<StoreState<GameProps>>(
+    rootReducer,
     applyMiddleware(logger)
 );
 

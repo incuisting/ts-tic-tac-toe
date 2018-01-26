@@ -21,7 +21,7 @@ interface DispatchProps {
 // 组件的state
 interface State { }
 // 组件的props，这里直接继承了 connect上使用的stateProps和DispatchProps的类型
-interface GameProps extends StateProps, DispatchProps { }
+export interface GameProps extends StateProps, DispatchProps { }
 
 const GameWrapper = styled.div`
     display: flex;  
@@ -113,11 +113,12 @@ function calculateWinner(squares: Array<null | string>) {
     return null;
 }
 
-const mapStateToProps = (state: StoreState): StateProps => {
+const mapStateToProps = (state: StoreState<GameProps>): StateProps => {
+    const _game: GameProps = state.game;
     return {
-        history: state.history,
-        xIsNext: state.xIsNext,
-        stepNumber: state.stepNumber
+        history: _game.history,
+        xIsNext: _game.xIsNext,
+        stepNumber: _game.stepNumber
     };
 };
 const mapDispatchToProps = (dispatch: Dispatch<DispatchProps>): DispatchProps => (
