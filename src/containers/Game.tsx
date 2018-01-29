@@ -1,6 +1,5 @@
 import { gameActions } from '../actions/gameActions';
-import { connect, Dispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { StoreState } from '../types';
 import * as React from 'react';
 import { Board } from '../components/Board';
@@ -15,7 +14,7 @@ interface StateProps {
     stepNumber: number;
 }
 interface DispatchProps {
-    handleClick: typeof gameActions.handelClick;
+    handleClick: typeof gameActions.handleClick;
     jumpTo: typeof gameActions.jumpTo;
 }
 // 组件的state
@@ -121,12 +120,8 @@ const mapStateToProps = (state: StoreState<GameProps>): StateProps => {
         stepNumber: _game.stepNumber
     };
 };
-const mapDispatchToProps = (dispatch: Dispatch<DispatchProps>): DispatchProps => (
-    {
-        ...bindActionCreators({
-            handleClick: gameActions.handelClick,
-            jumpTo: gameActions.jumpTo
-        }, dispatch)
-    });
+const mapDispatchToProps: DispatchProps = {
+    ...gameActions
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

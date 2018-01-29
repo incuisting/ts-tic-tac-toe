@@ -1,8 +1,8 @@
 import { createAction } from 'redux-actions';
 
-type History = Array<{ squares: Array<string | null>; }>;
-type XIsNext = boolean;
-type StepNumber = number;
+export type History = Array<{ squares: Array<string | null>; }>;
+export type XIsNext = boolean;
+export type StepNumber = number;
 
 export interface HandleClick {
   history: Array<{
@@ -18,7 +18,7 @@ export interface JumpTo {
 }
 
 export const gameActions = {
-  handelClick: createAction(
+  handleClick: createAction(
     'HANDLE_CLICK',
     (
       history: History,
