@@ -1,3 +1,7 @@
 import { GameState } from '../reducer/game';
 
-export type {}
+interface StoreEnhancerState { }
+
+export interface RootState extends StoreEnhancerState {
+    game: GameState;
+}

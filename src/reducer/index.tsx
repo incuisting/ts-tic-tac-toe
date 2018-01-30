@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
-import { StoreState } from '../types/index';
-import { GameProps } from '../containers/Game';
-import game from '../reducer/game';
+import { RootState } from '../store/rootState';
+import gameReducer from '../reducer/game';
 
-export default combineReducers<RootState,RootAction>({
-    game
+export default combineReducers<RootState>({
+    game: gameReducer,
 }); 
