@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { StoreState } from '../types';
 import * as React from 'react';
 import { Board } from '../components/Board';
+import { calculateWinner } from '../tool/calculateWinner';
 import styled from 'styled-components';
 
 // mapStateToProps 
@@ -89,27 +90,6 @@ export class Game extends React.Component<GameProps, State> {
             </GameWrapper>
         );
     }
-}
-
-// 胜负判断
-function calculateWinner(squares: Array<null | string>) {
-    const lines: number[][] = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-        const [a, b, c] = lines[i];
-        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return squares[a];
-        }
-    }
-    return null;
 }
 
 const mapStateToProps = (state: StoreState<GameProps>): StateProps => {
